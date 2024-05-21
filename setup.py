@@ -20,7 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'audio_subscriber = audio_test.audio_subscriber:main'
+            'audio_transcriber = audio_test.audio_transcriber:main'
         ],
     },
 )

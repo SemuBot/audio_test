@@ -2,15 +2,18 @@ import rclpy
 from rclpy.node import Node
 from .util import ignore_stderr
 from audio_common_msgs.msg import AudioData
+from std_msgs.msg import String
 import pyaudio
 import speech_recognition as sr
 
 class AudioSubscriber(Node):
     def __init__(self, suppress_error=True):
-        super().__init__('audio_subscriber')
+        super().__init__('audio_transcriber')
         self.subscription = self.create_subscription(
             AudioData, 'audio', self.listener_callback, 10)
-         
+
+        self.publisher_ = self.create_publisher(String, 'recognized_text', 10)
+
         with ignore_stderr(enable=suppress_error): # ALSA error suppresion
             self.audio_interface = pyaudio.PyAudio()
             
@@ -38,7 +41,14 @@ class AudioSubscriber(Node):
             try:
                 audio_data = sr.AudioData(self.audio_buffer, self.frame_rate, self.bytes_per_frame)
                 text = self.recognizer.recognize_google(audio_data, language='et-EE')
-                self.get_logger().info('Recognized Text: %s' % text)
+                # self.get_logger().info('Recognized Text: %s' % text)
+
+                msg = String()
+                msg.data = text
+                self.publisher_.publish(msg)
+
+                self.get_logger().info('Recognized Text: "%s"' % msg.data)
+
             except sr.UnknownValueError:
                 self.get_logger().info("Could not understand audio")
             except sr.RequestError as e:
@@ -56,14 +66,14 @@ class AudioSubscriber(Node):
 def main(args=None):
     rclpy.init(args=args)
 
-    audio_subscriber = AudioSubscriber()
+    audio_transcriber = AudioSubscriber()
 
     try:
-        rclpy.spin(audio_subscriber)
+        rclpy.spin(audio_transcriber)
     except KeyboardInterrupt:
         pass
     
-    audio_subscriber.destroy_node()
+    audio_transcriber.destroy_node()
     rclpy.shutdown()
 
 if __name__ == '__main__':
