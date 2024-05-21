@@ -2,7 +2,7 @@
 
 ROS2 test package for getting the data from the `/audio` topic and publishing it to the topic `/recognized_text` <br/>
 
-Used with the following packages: <br/>
+Used with the following packages (`!make sure that you follow the guidelines for respeaker_ros at first!`): <br/>
 https://github.com/SemuBot/respeaker_ros.git <br/>
 https://github.com/ros-drivers/audio_common.git (ros2 branch) <br/>
 
