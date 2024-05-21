@@ -18,7 +18,7 @@ In your ROS2 workspace: <br/>
 
 Then, run in separate terminals (Starting with `source install/local_setup.bash` in each terminal): <br/> 
 
-* `ros2 run respeaker_node respeaker_ros` 
+* `ros2 run respeaker_ros respeaker_node` 
 * `ros2 run semubot_eyes eye_controller` 
 * `ros2 run audio_test audio_transcriber` <br/>
 
