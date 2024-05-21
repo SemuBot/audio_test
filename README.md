@@ -1,6 +1,6 @@
 # audio_test
 
-ROS2 test package for getting the data from the `/audio` topic <br/>
+ROS2 test package for getting the data from the `/audio` topic and publishing it to the topic `/recognized_text` <br/>
 
 Used with the following packages: <br/>
 https://github.com/SemuBot/respeaker_ros.git <br/>
