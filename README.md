@@ -1,6 +1,6 @@
 # audio_test
 
-ROS2 test package for getting the data from the `/audio` topic and publishing it to the topic `/recognized_text` <br/>
+ROS2 test package for getting the data from the `/audio` topic, transcribing it into text (Estonian) and publishing it to the topic `/recognized_text` <br/>
 
 Used with the following packages (`!make sure that you follow the guidelines for respeaker_ros at first!`): <br/>
 https://github.com/SemuBot/respeaker_ros.git <br/>
